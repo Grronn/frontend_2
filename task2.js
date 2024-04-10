@@ -17,10 +17,11 @@ function task21(arr) {
 }
 
 function task22(year, month, arr) {
-    let filterMonthAndYear = arr.filter(ops => ops.year === year && ops.month === month);
-    let replenishment = filterMonthAndYear.reduce((sum, curr) => curr.type === "replenishment" ? sum + curr.amount : sum , 0); //пополнение
-    let monthWithdrawal = filterMonthAndYear.reduce((sum, curr) => curr.type === "withdrawal" ? sum + curr.amount  : sum , 0); //вывод
-    let payment = filterMonthAndYear.reduce((sum, curr) => curr.type === "payment" ? sum + curr.amount  : sum , 0); //оплата
+    let filteredMonthYear = arr.filter(ops => ops.year === year && ops.month === month);
+    let replenishment = filteredMonthYear.reduce((sum, curr) => curr.type === "replenishment" ? sum + curr.amount : sum , 0); //пополнение
+    let monthWithdrawal = filteredMonthYear.reduce((sum, curr) => curr.type === "withdrawal" ? sum + curr.amount  : sum , 0); //вывод
+    let payment = filteredMonthYear.reduce((sum, curr) => curr.type === "payment" ? sum + curr.amount  : sum , 0); //оплата
+
     let monthBalance = replenishment - monthWithdrawal - payment;
     let withdrawalRate = (monthWithdrawal / replenishment).toFixed(4);
     let rank = withdrawalRate < 0.15 ? "Золотой" : withdrawalRate < 0.3 ? "Серебряный" : "Бронзовый";
